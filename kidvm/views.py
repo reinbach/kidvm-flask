@@ -20,7 +20,15 @@ def about():
 #---------------------------------------------------------------------------
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
-    return _render("contact.html", dict())
+    form_contact = forms.Contact()
+    if form_contact.validate_on_submit():
+        form_contact.send()
+        flash("Thanks, your message has been sent. I can't wait to read it.")
+        return redirect("/")
+    context = dict(
+        form_contact=form_contact
+    )
+    return _render("contact.html", context)
 
 #---------------------------------------------------------------------------
 @app.route('/logout', methods=['GET'])

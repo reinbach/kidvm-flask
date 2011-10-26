@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% set page = "contact" %}
+{% from "_formhelpers.html" import render_field %}
 
 {% block content %}
     <div class="page-header">
@@ -8,4 +9,19 @@
             <small>Let us know how you feel</small>
         </h1>
     </div>
+
+    <form method="post" action="{{ context.action }}">
+         {{ context.form_contact.csrf }}
+         <fieldset>
+             {{ render_field(context.form_contact.subject) }}
+             {{ render_field(context.form_contact.from_email) }}
+             {{ render_field(context.form_contact.message, class="xxlarge", rows="10") }}
+             <div class="actions">
+                 <input type="submit" class="btn primary" value="Send" />
+                 <a href="/">
+                     <input type="button" class="btn" value="Cancel" />
+                 </a>
+             </div>
+         </fieldset>
+    </form>
 {% endblock content %}

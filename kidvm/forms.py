@@ -1,7 +1,11 @@
 from flaskext import wtf
 from flaskext.wtf.html5 import EmailField, EmailInput, DecimalField
+from flaskext.mail import Mail, Message
 
-from kidvm import models
+from kidvm import models, app
+
+mail = Mail(app)
+
 
 #===============================================================================
 class SignIn(wtf.Form):
@@ -56,7 +60,29 @@ class ResetPassword(wtf.Form):
     ])
     confirm = wtf.PasswordField('Confirm Password')
 
-    
+
+#===============================================================================
+class Contact(wtf.Form):
+    subject = wtf.TextField('Subject', [wtf.validators.Length(min=3, max=100)])
+    from_email = EmailField(
+        'From Email',
+        [wtf.validators.Email(), wtf.validators.optional()],
+        widget=EmailInput(),
+        description=u'optional'
+    )
+    message = wtf.TextAreaField('Message', [wtf.validators.Length(min=10)])
+
+    #---------------------------------------------------------------------------
+    def send(self):
+        msg = Message(
+            self.subject.data,
+            recipients=[app.config['DEFAULT_MAIL_SENDER']],
+            sender=self.from_email.data
+        )
+        msg.body = "%s" % self.message.data
+        mail.send(msg)
+
+
 #===============================================================================
 class Kid(wtf.Form):
     name = wtf.TextField('Name', [wtf.validators.Length(min=3, max=100)])
