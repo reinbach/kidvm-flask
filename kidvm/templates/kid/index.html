@@ -13,10 +13,10 @@
             {% for kid in context.kid_list %}
                 <h2>{{ kid.name }}</h2>
                 <p>
-                    <a href="/kids/detail/{{ kid.id }}" class="btn success">
+                    <a href="/kids/detail/{{ kid.id }}" class="btn success" rel="twipsy" data-original-title="Balance">
                         {{ "%0.2f" % kid.balance }}
                     </a>
-                    <a href="/kids/detail/{{ kid.id }}" class="btn info">
+                    <a href="/kids/detail/{{ kid.id }}" class="btn info" rel="twipsy" data-original-title="Allowance">
                         {{ "%0.2f" % kid.allowance_total }}
                     </a>
                     {% if kid.transactions.count() %}
@@ -44,10 +44,14 @@
 {% endblock %}
 
 {% block page_js %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap-twipsy.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/flot/jquery.flot.js') }}"></script>
     <script type="text/javascript">
         <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="excanvas.min.js"></script><![endif]-->
         $(function() {
+            $("a[rel=twipsy]").twipsy({
+                live: true
+            });
             $.plot(
                 $("#placeholder"), 
                 [ 
