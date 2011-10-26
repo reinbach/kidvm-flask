@@ -1,0 +1,39 @@
+{% extends "layout.html" %}}
+{% set page = "kids" %}
+{% from "_formhelpers.html" import render_field %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>
+            Save Kid
+            <small>The apple cart getting full?</small>
+        </h1>
+    </div>
+
+    <form method="post" action="{{ context.action }}">
+         {{ context.form_kid.csrf }}
+         <fieldset>
+             {{ render_field(context.form_kid.name) }}
+             {{ render_field(context.form_kid.opening_balance, class="span2", step="0.01") }}
+             {{ render_field(context.form_kid.opening_balance_date, class="span2") }}
+             <div class="actions">
+                 <input type="submit" class="btn primary" value="Save Kid" />
+                 <a href="/kids">
+                     <input type="button" class="btn" value="Cancel" />
+                 </a>
+             </div>
+         </fieldset>
+    </form>
+{% endblock content %}
+
+{% block page_css %}
+    <link type="text/css" href="{{ url_for('static', filename='css/smoothness/jquery-ui-1.8.16.custom.css') }}" rel="stylesheet" />
+{% endblock page_css %}
+{% block page_js %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-ui-1.8.16.custom.min.js') }}"></script>
+    <script type="text/javascript">
+        $(function() {
+            $("#opening_balance_date").datepicker();
+        });
+    </script>
+{% endblock page_js %}

@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% set page = "about" %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>
+            {{ page|capitalize }}
+            <small>The What How Why</small>
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="span4">
+            <h2>It's Free</h2>
+            <p>You don't have to worry about pesky fees for using this application. Just pesky kids.</p>
+
+            <h2>Pretty Graphs</h2>
+            <p>You can view your information in nice pretty graphs.</p>
+
+            <h2>Simple <small>(KISS)</small></h2>
+            <p>Everything is kept as simple as possible, it's hard enough raising kids.</p>
+
+            <h2>Automatic</h2>
+            <p>Once you have setup allowances, sit back and enjoy the kids. The allowances will automatically be added. And there goes their inheritance.</p>
+
+            <h2>No Limits</h2>
+            <p>There are no limits in the number of kids or transactions allowed. Well until the money runs out.</p>
+        </div>
+        <div class="span11 offset1">
+            <h3>What is Kid VM?</h3>
+            <p>A simple way to track allowances for your kids.</p>
+
+            <h3>How to use Kid VM?</h3>
+            <ul class="tabs">
+                <li class="active"><a href="#">1: Sign In</a></li>
+                <li><a href="#">2: Add Kid</a></li>
+                <li><a href="#">3: Add Allowance</a></li>
+                <li><a href="#">4: Add Transaction</a></li>
+                <li><a href="#">5: View Graphs</a></li>
+            </ul>
+
+            <h3>Why Kid VM?</h3>
+            <p>Come Friday, I alway forgot to have the boys' allowance ready to give to them. Then a few weeks/months would go by and they would ask how much they had. So I decided to create this web application to keep track of their allowances.</p>
+            <p>Seeng that I had this issue, I thought others may too, and hopefully you will find this application to be helpful. If not, <a href="/contact">let me know why</a> and maybe we can make it so.</p>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Kid VM - Simple Allownce Tracking</title>
+    <meta name="description" content="kids allawance manage track money balance transactions graph history automatically">
+    <meta name="author" content="Greg Reinbach - IRON Labs, Inc.">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+    <style type="text/css">
+      body, section {
+        padding-top: 60px;
+      }
+      #placeholder table {
+          width: auto;
+      }
+    </style>
+    {% block page_css %}{% endblock page_css %}
+
+    <!-- javascript -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.6.4.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap-alerts.js') }}"></script>
+    {% block page_js %}{% endblock page_js %}
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+  </head>
+
+  <body>
+
+    <div class="topbar">
+        <div class="fill">
+            <div class="container">
+                <a class="brand" href="/">Kid VM</a>
+                <ul class="nav">
+                    {% set active_page = page -%}
+                    {% set nav_bar = [
+                        ("/", "index", "Home"),
+                        ("/about", "about", "About"),
+                        ("/contact", "contact", "Contact"),
+                    ] -%}
+                    {% for href, id, caption in nav_bar %}
+                        <li {% if id == active_page %}class="active"{% endif %}>
+                            <a href="{{ href|e }}">{{ caption|e }}</a>
+                        </li>
+                    {% endfor %}
+                    {% if session.user %}
+                        {% set nav_user_bar = [
+                            ("/kids", "kids", "Kids"),
+                        ] -%}
+                    {% endif %}
+                    {% for href, id, caption in nav_user_bar %}
+                        <li {% if id == active_page %}class="active"{% endif %}>
+                            <a href="{{ href|e }}">{{ caption|e }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <ul class="nav secondary-nav">
+                    {% if session.user %}
+                        <li><a href="/logout">Logout</a></li>
+                    {% else %}
+                        <li {% if page == "signin" %}class="active"{% endif %}>
+                            <a href="/signin">Sign In</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert-message {{ category }} fade in" data-alert="alert">
+                        <a class="close" href="#">x</a>
+                        <p>{{ message }}</p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+        <footer>
+            <p>&copy; <a href="http://www.ironlabs.com">IRON Labs, Inc</a> 2011</p>
+        </footer>
+    </div> <!-- /container -->
+  </body>
+</html>

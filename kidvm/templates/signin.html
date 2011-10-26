@@ -1,0 +1,45 @@
+{% extends "layout.html" %}}
+{% set page = "signin" %}
+{% from "_formhelpers.html" import render_field %}
+
+{% block content %}
+     <div class="page-header">
+         <h1>
+             Sign In
+             <small>You already have an account</small>
+         </h1>
+     </div>
+     
+     <form method="post" action="/signin">
+         {{ context.form_signin.csrf }}
+         <fieldset>
+             {{ render_field(context.form_signin.email) }}
+             {{ render_field(context.form_signin.password) }}
+             <div class="actions">
+                 <input type="submit" class="btn primary" value="Sign In" />
+                 <a href="/forgot/password">
+                     <input type="button" class="btn" value="Forgot Password" />
+                 </a>
+             </div>
+         </fieldset>
+     </form>
+
+     <div class="page-header">
+         <h1>
+             Register
+             <small>You want to create an account</small>
+         </h1>
+     </div>
+     
+     <form method="post" action="/register">
+         {{ context.form_register.csrf }}
+         <fieldset>
+             {{ render_field(context.form_register.email) }}
+             {{ render_field(context.form_register.password) }}
+             {{ render_field(context.form_register.confirm) }}
+             <div class="actions">
+                 <input type="submit" class="btn primary" value="Register" />
+             </div>
+         </fieldset>
+     </form>
+{% endblock content %}

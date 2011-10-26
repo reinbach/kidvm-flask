@@ -1,0 +1,363 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Code &mdash; Kid VM v0.1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Kid VM v0.1 documentation" href="index.html" />
+    <link rel="prev" title="Tutorial" href="tutorial.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tutorial.html" title="Tutorial"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Kid VM v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-kidvm.models">
+<span id="code"></span><h1>Code<a class="headerlink" href="#module-kidvm.models" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="kidvm.models.Account">
+<em class="property">class </em><tt class="descclassname">kidvm.models.</tt><tt class="descname">Account</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/kidvm/models.html#Account"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kidvm.models.Account" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Account is the base of everything</p>
+<p>Everything is related to the account in some manner or form.</p>
+<dl class="attribute">
+<dt id="kidvm.models.Account.categories">
+<tt class="descname">categories</tt><a class="headerlink" href="#kidvm.models.Account.categories" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Account.created">
+<tt class="descname">created</tt><a class="headerlink" href="#kidvm.models.Account.created" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Account.id">
+<tt class="descname">id</tt><a class="headerlink" href="#kidvm.models.Account.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Account.is_active">
+<tt class="descname">is_active</tt><a class="headerlink" href="#kidvm.models.Account.is_active" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Account.kids">
+<tt class="descname">kids</tt><a class="headerlink" href="#kidvm.models.Account.kids" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Account.name">
+<tt class="descname">name</tt><a class="headerlink" href="#kidvm.models.Account.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Account.plan_key">
+<tt class="descname">plan_key</tt><a class="headerlink" href="#kidvm.models.Account.plan_key" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Account.user">
+<tt class="descname">user</tt><a class="headerlink" href="#kidvm.models.Account.user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kidvm.models.Allowance">
+<em class="property">class </em><tt class="descclassname">kidvm.models.</tt><tt class="descname">Allowance</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/kidvm/models.html#Allowance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kidvm.models.Allowance" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="kidvm.models.Allowance.amount">
+<tt class="descname">amount</tt><a class="headerlink" href="#kidvm.models.Allowance.amount" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Allowance.created">
+<tt class="descname">created</tt><a class="headerlink" href="#kidvm.models.Allowance.created" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Allowance.id">
+<tt class="descname">id</tt><a class="headerlink" href="#kidvm.models.Allowance.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Allowance.is_active">
+<tt class="descname">is_active</tt><a class="headerlink" href="#kidvm.models.Allowance.is_active" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Allowance.kid_id">
+<tt class="descname">kid_id</tt><a class="headerlink" href="#kidvm.models.Allowance.kid_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Allowance.period">
+<tt class="descname">period</tt><a class="headerlink" href="#kidvm.models.Allowance.period" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Allowance.period_day">
+<tt class="descname">period_day</tt><a class="headerlink" href="#kidvm.models.Allowance.period_day" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Allowance.transactions">
+<tt class="descname">transactions</tt><a class="headerlink" href="#kidvm.models.Allowance.transactions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kidvm.models.Category">
+<em class="property">class </em><tt class="descclassname">kidvm.models.</tt><tt class="descname">Category</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/kidvm/models.html#Category"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kidvm.models.Category" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="kidvm.models.Category.account_id">
+<tt class="descname">account_id</tt><a class="headerlink" href="#kidvm.models.Category.account_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Category.id">
+<tt class="descname">id</tt><a class="headerlink" href="#kidvm.models.Category.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Category.name">
+<tt class="descname">name</tt><a class="headerlink" href="#kidvm.models.Category.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Category.transactions">
+<tt class="descname">transactions</tt><a class="headerlink" href="#kidvm.models.Category.transactions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kidvm.models.Kid">
+<em class="property">class </em><tt class="descclassname">kidvm.models.</tt><tt class="descname">Kid</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/kidvm/models.html#Kid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kidvm.models.Kid" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="kidvm.models.Kid.account_id">
+<tt class="descname">account_id</tt><a class="headerlink" href="#kidvm.models.Kid.account_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Kid.allowances">
+<tt class="descname">allowances</tt><a class="headerlink" href="#kidvm.models.Kid.allowances" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Kid.birthday">
+<tt class="descname">birthday</tt><a class="headerlink" href="#kidvm.models.Kid.birthday" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Kid.created">
+<tt class="descname">created</tt><a class="headerlink" href="#kidvm.models.Kid.created" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Kid.id">
+<tt class="descname">id</tt><a class="headerlink" href="#kidvm.models.Kid.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Kid.is_active">
+<tt class="descname">is_active</tt><a class="headerlink" href="#kidvm.models.Kid.is_active" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Kid.name">
+<tt class="descname">name</tt><a class="headerlink" href="#kidvm.models.Kid.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Kid.opening_balance">
+<tt class="descname">opening_balance</tt><a class="headerlink" href="#kidvm.models.Kid.opening_balance" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kidvm.models.Transaction">
+<em class="property">class </em><tt class="descclassname">kidvm.models.</tt><tt class="descname">Transaction</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/kidvm/models.html#Transaction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kidvm.models.Transaction" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="kidvm.models.Transaction.allowance_id">
+<tt class="descname">allowance_id</tt><a class="headerlink" href="#kidvm.models.Transaction.allowance_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Transaction.amount">
+<tt class="descname">amount</tt><a class="headerlink" href="#kidvm.models.Transaction.amount" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Transaction.category_id">
+<tt class="descname">category_id</tt><a class="headerlink" href="#kidvm.models.Transaction.category_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Transaction.created">
+<tt class="descname">created</tt><a class="headerlink" href="#kidvm.models.Transaction.created" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Transaction.description">
+<tt class="descname">description</tt><a class="headerlink" href="#kidvm.models.Transaction.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Transaction.id">
+<tt class="descname">id</tt><a class="headerlink" href="#kidvm.models.Transaction.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Transaction.kid_id">
+<tt class="descname">kid_id</tt><a class="headerlink" href="#kidvm.models.Transaction.kid_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Transaction.modified">
+<tt class="descname">modified</tt><a class="headerlink" href="#kidvm.models.Transaction.modified" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.Transaction.transaction_date">
+<tt class="descname">transaction_date</tt><a class="headerlink" href="#kidvm.models.Transaction.transaction_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="kidvm.models.User">
+<em class="property">class </em><tt class="descclassname">kidvm.models.</tt><tt class="descname">User</tt><big>(</big><em>email</em>, <em>password</em><big>)</big><a class="reference internal" href="_modules/kidvm/models.html#User"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kidvm.models.User" title="Permalink to this definition">¶</a></dt>
+<dd><p>The User who accesses the system</p>
+<p>Basic information on the user</p>
+<dl class="attribute">
+<dt id="kidvm.models.User.account_id">
+<tt class="descname">account_id</tt><a class="headerlink" href="#kidvm.models.User.account_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.User.created">
+<tt class="descname">created</tt><a class="headerlink" href="#kidvm.models.User.created" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.User.email">
+<tt class="descname">email</tt><a class="headerlink" href="#kidvm.models.User.email" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.User.id">
+<tt class="descname">id</tt><a class="headerlink" href="#kidvm.models.User.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="kidvm.models.User.password">
+<tt class="descname">password</tt><a class="headerlink" href="#kidvm.models.User.password" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><tt class="descclassname">kidvm.models.</tt><tt class="descname">User</tt><big>(</big><em>email</em>, <em>password</em><big>)</big><a class="reference internal" href="_modules/kidvm/models.html#User"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>The User who accesses the system</p>
+<p>Basic information on the user</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="kidvm.models.User.__init__">
+<tt class="descclassname">User.</tt><tt class="descname">__init__</tt><big>(</big><em>email</em>, <em>password</em><big>)</big><a class="headerlink" href="#kidvm.models.User.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accept as a minimum the email and password for the user when
+initializing</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tutorial.html"
+                        title="previous chapter">Tutorial</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/code.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tutorial.html" title="Tutorial"
+             >previous</a> |</li>
+        <li><a href="index.html">Kid VM v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Greg Reinbach.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.8.
+    </div>
+  </body>
+</html>

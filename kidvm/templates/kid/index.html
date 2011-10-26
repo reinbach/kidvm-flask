@@ -1,0 +1,71 @@
+{% extends "layout.html" %}}
+{% set page = "kids" %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>
+            Kids
+            <small>The apples of the eye</small>
+        </h1>
+    </div>
+    <div class="row">
+        <div class="span5">
+            {% for kid in context.kid_list %}
+                <h2>{{ kid.name }}</h2>
+                <p>
+                    <a href="/kids/detail/{{ kid.id }}" class="btn success">
+                        {{ "%0.2f" % kid.balance }}
+                    </a>
+                    <a href="/kids/detail/{{ kid.id }}" class="btn info">
+                        {{ "%0.2f" % kid.allowance_total }}
+                    </a>
+                    {% if kid.transactions.count() %}
+                        <a href="/kids/detail/{{ kid.id }}" class="btn">Details</a>
+                    {% endif %}
+                </p>
+            {% endfor %}
+        </div>
+        <div class="span11">
+            <div id="placeholder" style="width: 660px; height: 300px;"></div>
+        </div>
+    </div>
+
+    <section>
+        <div class="row">
+            <div class="span16">
+                <p>
+                    <a class="btn js-btn" href="/kids/add">Add Kid</a>
+                    <a class="btn js-btn" href="/kids/allowance/add">Add Allowance</a>
+                    <a class="btn js-btn" href="/kids/transaction/add">Add Transaction</a>
+                </p>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block page_js %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/flot/jquery.flot.js') }}"></script>
+    <script type="text/javascript">
+        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="excanvas.min.js"></script><![endif]-->
+        $(function() {
+            $.plot(
+                $("#placeholder"), 
+                [ 
+                    {% for kid in context.kid_list %}
+                        {% if kid.history %}
+                            {
+                                label: "{{ kid.name }}", 
+                                data :[ 
+                                    {% for trx in kid.history %}
+                                        [{{ trx.0 * 1000 }}, {{ trx.1 }}],
+                                    {% endfor %}
+                                ]
+                            },
+                        {% endif %}
+                    {% endfor %}
+                ],
+                {xaxis: {mode: "time", timeformat: "%m/%d"}}
+            );
+        });
+    </script>
+{% endblock %}

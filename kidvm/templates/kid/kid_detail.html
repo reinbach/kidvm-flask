@@ -1,0 +1,85 @@
+{% extends "layout.html" %}}
+{% set page = "kids" %}
+
+{% block content %}
+    <div class="row">
+        <div class="span16">
+            <p>
+                <a class="btn js-btn" href="/kids/allowance/add">Add Allowance</a>
+                <a class="btn js-btn" href="/kids/transaction/add">Add Transaction</a>
+            </p>
+        </div>
+    </div>
+    <section>
+        <div class="page-header">
+            <h1>
+                {{ context.kid.name }}
+                <small>
+                    <a href="/kids/edit/{{ context.kid.id }}"><code>[edit]</code></a>
+                    <div id="modal-kid-delete-{{ context.kid.id }}" class="modal hide fade">
+                        <div class="modal-header">
+                            <a href="#" class="close">&times;</a>
+                            <h3>Delete {{ context.kid.name }}?</h3>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to delete {{ context.kid.name }}?</p>
+                            <p>All information associated with {{ context.kid.name }} will also be removed. This includes allowance and transaction information.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="/kids/delete/{{ context.kid.id }}" class="btn primary">Delete</a>
+                            <a href="#" class="btn close secondary">Cancel</a>
+                        </div>
+                    </div>
+                    <a href="#" data-controls-modal="modal-kid-delete-{{ context.kid.id }}" data-backdrop="true"><code>[delete]</code></a>
+                    &nbsp;&nbsp;
+                    Allowance: {{ "%0.2f" % context.kid.allowance_total }}
+                    &nbsp;
+                    Balance: {{ "%0.2f" % context.kid.balance }}
+                </small>
+            </h1>
+        </div>
+        <div class="row">
+            <div class="span16">
+                {% if context.kid.transactions.count() %}
+                    <div id="placeholder" style="width: 960px; height: 300px;"></div>
+                    <h3>Transactions</h3>
+                    {% include "kid/transaction_table.html" %}
+                {% endif %}
+                {% if context.kid.allowances.count() %}
+                    <h3>Allowances</h3>
+                    {% include "kid/allowance_table.html" %}
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="row">
+            <div class="span16">
+                <p>
+                    <a class="btn js-btn" href="/kids/allowance/add">Add Allowance</a>
+                    <a class="btn js-btn" href="/kids/transaction/add">Add Transaction</a>
+                </p>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+
+{% block page_js %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap-modal.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/flot/jquery.flot.js') }}"></script>
+    <script type="text/javascript">
+        <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="excanvas.min.js"></script><![endif]-->
+        $(function() {
+            $.plot(
+                $("#placeholder"), 
+                [ [ 
+                    {% for trx in context.kid.history %}
+                        [{{ trx.0 * 1000 }}, {{ trx.1 }}],
+                    {% endfor %}
+                ] ],
+                {xaxis: {mode: "time", timeformat: "%m/%d"}}
+            );
+        });
+    </script>
+{% endblock %}

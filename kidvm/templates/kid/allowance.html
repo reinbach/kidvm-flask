@@ -1,0 +1,28 @@
+{% extends "layout.html" %}}
+{% set page = "Kids" %}
+{% from "_formhelpers.html" import render_field %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>
+            Save Allowance
+            <small>Money grows on trees</small>
+        </h1>
+    </div>
+
+    <form method="post" action="{{ context.action }}">
+         {{ context.form_allowance.csrf }}
+         <fieldset>
+             {{ render_field(context.form_allowance.kid_id) }}
+             {{ render_field(context.form_allowance.period) }}
+             {{ render_field(context.form_allowance.period_day) }}
+             {{ render_field(context.form_allowance.amount, class="span2", step="0.01") }}
+             <div class="actions">
+                 <input type="submit" class="btn primary" value="Save Allowance" />
+                 <a href="/kids">
+                     <input type="button" class="btn" value="Cancel" />
+                 </a>
+             </div>
+         </fieldset>
+    </form>
+{% endblock content %}

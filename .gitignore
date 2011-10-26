@@ -1,0 +1,3 @@
+*.pyc
+logs/errors
+config_kidvm.py
