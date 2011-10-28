@@ -109,14 +109,18 @@ class Allowance(wtf.Form):
     kid_id = wtf.SelectField(u'Kid', coerce=int)
     period_day = wtf.SelectField(
         u'Day',
-        coerce=int,
-        choices=[(x, x) for x in xrange(1, 32, 1)]
+        choices=models.get_day_options('weekly'),
     )
     period = wtf.SelectField(
         u'Frequency',
-        choices=[('weekly', 'Weekly'), ('monthly', 'Monthly')]
+        choices=models.PERIOD_CHOICES
     )
     amount = DecimalField('Amount', [wtf.validators.NumberRange(min=0.0)])
+
+    #---------------------------------------------------------------------------
+    def validate_period_day(form, field):
+        if not (0 < int(field.data) < 32):
+            raise ValidationError("Day needs to be between 1 and 31.")
 
     #---------------------------------------------------------------------------
     def set_kid_choices(self, user):

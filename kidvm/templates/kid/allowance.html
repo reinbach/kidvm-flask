@@ -26,3 +26,23 @@
          </fieldset>
     </form>
 {% endblock content %}
+
+{% block page_js %}
+    <script type="text/javascript">
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+        $(function() {
+            $("#period").bind("change", function(){
+                $.getJSON($SCRIPT_ROOT + "/kid/allowance/_day_options", {
+                    frequency: $(this).val()
+                }, function(data) {
+                    var options = "";
+                    for (var i = 0; i < data.result.length; i++) {
+                        options += "<option value='" + data.result[i][0] + "'>" + data.result[i][1] + "</option>";
+                    }
+                    $("#period_day").html(options);
+                });
+                return false;
+            });
+        });
+    </script>
+{% endblock page_js %}

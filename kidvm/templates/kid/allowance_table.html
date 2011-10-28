@@ -13,7 +13,7 @@
             <tr>
                 <td>{{ loop.index0 + 1 }}</td>
                 <td>{{ allowance.period.capitalize() }}</td>
-                <td>{{ allowance.period_day }}</td>
+                <td>{{ allowance.get_period_day_display }}</td>
                 <td>{{ "%0.2f" % allowance.amount }}</td>
                 <td>
                     <a href="/kids/allowance/edit/{{ allowance.id}}">

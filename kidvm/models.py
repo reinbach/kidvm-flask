@@ -11,6 +11,11 @@ from kidvm import app
 db = SQLAlchemy(app)
 mail = Mail(app)
 
+PERIOD_CHOICES = [
+    ('weekly', 'Weekly'),
+    ('monthly', 'Monthly')
+]
+
 #===============================================================================
 class AuthUser(db.Model):
     """The User who accesses the system
@@ -249,6 +254,14 @@ class Allowance(db.Model):
         return '<Allowance %r (%r)' % (self.amount, self.kid)
 
     #---------------------------------------------------------------------------
+    @property
+    def get_period_day_display(self):
+        for key, value in get_day_options(self.period):
+            if self.period_day == int(key):
+                return value
+        return self.period_day
+        
+    #---------------------------------------------------------------------------
     def save(self, user):
         """Ensure that the kid is related to the user provided"""
         if not valid_kid(self.kid_id, user):
@@ -469,3 +482,18 @@ def valid_kid(kid_id, user):
 #---------------------------------------------------------------------------
 def get_kids(user):
     return [(k.id, k.name) for k in Kid.query.filter_by(account_id=user.account_id)]
+
+#---------------------------------------------------------------------------
+def get_day_options(frequency):
+    if frequency == "weekly":
+        return [
+            ('1', 'Monday'),
+            ('2', 'Tuesday'),
+            ('3', 'Wednesday'),
+            ('4', 'Thursday'),
+            ('5', 'Friday'),
+            ('6', 'Saturday'),
+            ('7', 'Sunday'),
+        ]
+    else:
+        return [(x, x) for x in xrange(1, 32, 1)]

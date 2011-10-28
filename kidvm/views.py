@@ -1,4 +1,4 @@
-from flask import render_template, request, flash, session, redirect, url_for
+from flask import render_template, request, flash, session, redirect, url_for, jsonify
 
 from kidvm import app, models, forms, utils
 
@@ -213,6 +213,15 @@ def kid_allowance_delete(user, allowance):
     allowance.delete()
     flash("Allowance has been removed")
     return redirect("/kids")
+
+#---------------------------------------------------------------------------
+@app.route("/kid/allowance/_day_options", methods=['GET'])
+def kid_allowance_day_options():
+    day_options = ""
+    frequency = request.args.get('frequency', '', type=str)
+    if frequency in [x[0] for x in models.PERIOD_CHOICES]:
+        day_options = models.get_day_options(frequency)
+    return jsonify(result=day_options)
     
 #--------------------------------------------------------------------------
 @app.route("/kids/transaction/add", methods=['GET', 'POST'])
