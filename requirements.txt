@@ -11,6 +11,5 @@ bpython==0.10.1
 distribute==0.6.19
 docutils==0.8.1
 httplib2==0.7.1
--e git+https://github.com/simplegeo/python-oauth2.git@1fcc1a6d49a7be2a9394125acf5b1c2227fcde79#egg=oauth2-dev
 psycopg2==2.4.2
 wsgiref==0.1.2
