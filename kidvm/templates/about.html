@@ -30,18 +30,69 @@
             <h3>What is Kid VM?</h3>
             <p>A simple way to track allowances for your kids.</p>
 
-            <h3>How to use Kid VM?</h3>
-            <ul class="tabs">
-                <li class="active"><a href="#">1: Sign In</a></li>
-                <li><a href="#">2: Add Kid</a></li>
-                <li><a href="#">3: Add Allowance</a></li>
-                <li><a href="#">4: Add Transaction</a></li>
-                <li><a href="#">5: View Graphs</a></li>
-            </ul>
+            <section>
+                <h3>How to use Kid VM?</h3>
+                <ul class="tabs" data-tabs="tabs">
+                    <li class="active"><a href="#signin">1: Sign In</a></li>
+                    <li><a href="#kid">2: Add Kid</a></li>
+                    <li><a href="#allowance">3: Add Allowance</a></li>
+                    <li><a href="#transaction">4: Add Transaction</a></li>
+                    <li><a href="#graph">5: View Graphs</a></li>
+                </ul>
+     
+                <div class="pill-content">
+                    <div class="active" id="signin">
+                        <p>If you do not have an account yet, you will need to Register first. Simply enter in your email and password. Your email address is needed in case you forget your password and need to reset your password.</p>
+                        <p><img src="{{ url_for('static', filename='images/howto/register.png') }}" alt="Register Screenshot" width="50%" /></p>
 
-            <h3>Why Kid VM?</h3>
-            <p>Come Friday, I alway forgot to have the boys' allowance ready to give to them. Then a few weeks/months would go by and they would ask how much they had. So I decided to create this web application to keep track of their allowances.</p>
-            <p>Seeng that I had this issue, I thought others may too, and hopefully you will find this application to be helpful. If not, <a href="/contact">let me know why</a> and maybe we can make it so.</p>
+                        <br />
+
+                        <p>Once you have registered you can signin with the email and password you provided. If you are unable to remember your password, click on the "Forgot Password" button and you will be able to reset your password and get back into your account.</p>
+
+                        <p><img src="{{ url_for('static', filename='images/howto/signin.png') }}" alt="Signin Screenshot" width="50%" /></p>
+
+                    </div>
+                    <div id="kid">
+                        <p>Once you have an account the first thing you need to do is to add a Kid. You will need to enter in the Name of your kid, the Starting Balance and the Starting Date. The Starting Date is used to determine when the graphing should start from.</p>
+
+                        <p><img src="{{ url_for('static', filename='images/howto/add_kid.png') }}" alt="Add Kid Screenshot" width="50%" /></p>
+                    </div>
+                    <div id="allowance">
+                        <p>The whole point of this application is to track allowances, so you should add an allowance. You select which Kid. How often the allowance needs to be with the Frequency and which Day of the week or month the allowance is due. Then finally the Amount.</p>
+
+                        <p><img src="{{ url_for('static', filename='images/howto/add_allowance.png') }}" alt="Add Allowance Screenshot" width="50%" /></p>
+                    </div>
+                    <div id="transaction">
+                        <p>Allowances are automatically recorded on their due dates. But should you need to record an expense or some other transaction, you can create a transaction. You enter in the relevant information for the transaction. If the transaction reduces the balance then enter the amount with a leading minus sign. eg: -10.00 </p>
+
+                        <p><img src="{{ url_for('static', filename='images/howto/add_transaction.png') }}" alt="Add Transaction Screenshot" width="50%" /></p>
+                    </div>
+                    <div id="graph">
+                        <p>Once you have setup your children, you will be able to view all your childrens information on a single page. The graph shows each of the kids balances over time.</p>
+
+                        <p><img src="{{ url_for('static', filename='images/howto/graphs.png') }}" alt="Graph Screenshot" width="50%" /></p>
+
+                        <p>You are also able to dive into more detail on each Kid by clicking on the "Details" button. On this detail page you will be able to edit all the information relating to your Kid. You also get a view of the transactions and the allowances. Each of which can be edited or deleted.</p>
+
+                        <p><img src="{{ url_for('static', filename='images/howto/detail.png') }}" alt="Kid Detail Screenshot" width="50%" /></p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Why Kid VM?</h3>
+                <p>Come Friday, I alway forgot to have the boys' allowance ready to give to them. Then a few weeks/months would go by and they would ask how much they had. So I decided to create this web application to keep track of their allowances.</p>
+                <p>Seeng that I had this issue, I thought others may too, and hopefully you will find this application to be helpful. If not, <a href="/contact">let me know why</a> and maybe we can make it so.</p>
+            </section>
         </div>
     </div>
 {% endblock content %}
+
+{% block page_js %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap-tabs.js') }}"></script>
+    <script type="text/javascript">
+        $(function() {
+            $(".tabs").tabs();
+        });
+    </script>
+{% endblock page_js %}
