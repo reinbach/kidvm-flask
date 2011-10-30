@@ -1,4 +1,5 @@
 import base64
+import calendar
 import datetime
 import hashlib
 import time
@@ -351,6 +352,10 @@ class Transaction(db.Model):
         self.kid_id = kid_id
         self.transaction_date = trx_date
         self.amount = amount
+        # if category value is a string determine the category object
+        if type(category) in [str, unicode]:
+            kid = Kid.query.filter_by(id=self.kid_id).first()
+            category = Category(kid.account_id, category).save()
         self.category = category
         self.description = description
 
@@ -359,10 +364,10 @@ class Transaction(db.Model):
         return '<Transaction: %r (%r)>' % (self.amount, self.kid)
 
     #---------------------------------------------------------------------------
-    def save(self, user):
-        if not valid_kid(self.kid_id, user):
+    def save(self, account):
+        if not valid_kid(self.kid_id, account):
             return False
-
+        
         # check whether inserting or updating
         if self.id:
             db.session.execute(
@@ -474,8 +479,8 @@ def get_user_from_uid(uid):
     return False
 
 #---------------------------------------------------------------------------
-def valid_kid(kid_id, user):
-    if kid_id in [x.id for x in Kid.query.filter_by(account_id=user.account_id)]:
+def valid_kid(kid_id, account):
+    if kid_id in [x.id for x in Kid.query.filter_by(account_id=account.id)]:
         return True
     return False
 
@@ -497,3 +502,56 @@ def get_day_options(frequency):
         ]
     else:
         return [(x, x) for x in xrange(1, 32, 1)]
+
+#---------------------------------------------------------------------------
+def run_allowance():
+    """Create transactions for allowances that are due today"""
+    # get current day of the week
+    # get list of allowances that are weekly and match current day of the week
+    # create transactions for each of them
+    weekday = datetime.date.today().isoweekday()
+    allowance_list = Allowance.query.filter_by(
+        period='weekly',
+        period_day=weekday,
+        is_active=True
+    )
+    for allowance in allowance_list:
+        #TODO check that allowance not already added
+        trx = Transaction(
+            allowance.kid.id,
+            datetime.date.today(),
+            allowance.amount,
+            'Weekly Allowance',
+            description='Automatic'
+        )
+        trx.allowance_id = allowance.id
+        trx.save(allowance.kid.account)
+
+    # get current day of the month
+    # if last day of the month, then include all days from last day of the month
+    # to 31
+    # get list of allowances that are monthly and match current day of the month
+    # create transactions for each of them
+    day = int(datetime.date.today().strftime("%d"))
+    month = int(datetime.date.today().strftime("%m"))
+    year = int(datetime.date.today().strftime("%Y"))
+    max_day = calendar.monthrange(year, month)[1]
+    allowance_list = Allowance.query.filter_by(
+        period='Monthly',
+    )
+    if day == max_day:
+        allowance_list = allowance_list.filter_by(period_day >= max_day)
+    else:
+        allowance_list = allowance_list.filter_by(period_day = day)
+    for allowance in allowance_list:
+        trx = Transaction(
+            allowance.kid.id,
+            datetime.date.today(),
+            allowance.amount,
+            'Monthly Allowance',
+            description='Automatic',
+        )
+        trx.allowance_id = allowance.id
+        trx.save(allowance.kid.account)
+
+    return True

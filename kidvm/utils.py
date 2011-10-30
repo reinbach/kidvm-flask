@@ -34,7 +34,7 @@ def valid_kid(f):
         kid = models.Kid.query.filter_by(
             id=kid_id,
         ).first_or_404()
-        if not models.valid_kid(kid.id, user):
+        if not models.valid_kid(kid.id, user.account):
             return redirect("/kids")
         return f(user, kid, *args, **kwargs)
     return decorated_function
@@ -55,7 +55,7 @@ def valid_allowance(f):
         allowance = models.Allowance.query.filter_by(
             id=allowance_id,
         ).first_or_404()
-        if not models.valid_kid(allowance.kid_id, user):
+        if not models.valid_kid(allowance.kid_id, user.account):
             return redirect("/kids")
         return f(user, allowance, *args, **kwargs)
     return decorated_function
@@ -76,7 +76,7 @@ def valid_transaction(f):
         transaction = models.Transaction.query.filter_by(
             id=transaction_id,
         ).first_or_404()
-        if not models.valid_kid(transaction.kid_id, user):
+        if not models.valid_kid(transaction.kid_id, user.account):
             return redirect("/kids")
         return f(user, transaction, *args, **kwargs)
     return decorated_function

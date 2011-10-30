@@ -158,15 +158,14 @@ class Transaction(wtf.Form):
 
     #---------------------------------------------------------------------------
     def save(self, user, transaction_id=None):
-        category = models.Category(user.account_id, self.category.data).save()
         transaction = models.Transaction(
             self.kid_id.data,
             self.transaction_date.data,
             self.amount.data,
-            category,
+            self.category.data,
             self.description.data
         )
         if transaction_id:
             transaction.id = transaction_id
-        return transaction.save(user)
+        return transaction.save(user.account)
 
