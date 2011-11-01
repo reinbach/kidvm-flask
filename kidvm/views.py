@@ -111,7 +111,7 @@ def reset_password(uid):
 @utils.login_required
 def kids(user):
     kid_list = models.Kid.query.filter_by(account_id=user.account_id).order_by('name')
-    if not kid_list:
+    if kid_list.count() == 0:
         return redirect("/kids/add")
     context = dict(
         kid_list=kid_list,
