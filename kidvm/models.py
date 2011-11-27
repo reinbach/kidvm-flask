@@ -173,7 +173,7 @@ class Kid(db.Model):
         if not trxs:
             return {}
         # if less than 60 days old go by days else by weeks
-        days = abs(datetime.date.today() - trxs.first().transaction_date).days
+        days = abs(datetime.datetime.today() - trxs.first().transaction_date).days
         dataset = {}
         total = self.opening_balance
         if days <= 30:
@@ -184,9 +184,9 @@ class Kid(db.Model):
                         dataset[prev] = total
                 dataset[trx.transaction_date] = total = total + trx.amount
                 prev = trx.transaction_date
-            if trx.transaction_date < datetime.date.today():
+            if trx.transaction_date < datetime.datetime.today():
                 cur = trx.transaction_date
-                while cur < datetime.date.today():
+                while cur < datetime.datetime.today():
                     cur = cur + datetime.timedelta(1)
                     dataset[cur] = total
         else:
@@ -208,7 +208,7 @@ class Kid(db.Model):
                         dataset[prev] = total
                 dataset[month] = total = total + trx.amount
                 prev = month
-            if trx.transaction_date < datetime.date.today():
+            if trx.transaction_date < datetime.datetime.today():
                 cur = datetime.date(trx.transaction_date.year, trx.transaction_date.month, 1)
                 cur_month = datetime.date(
                     datetime.date.today().year,
