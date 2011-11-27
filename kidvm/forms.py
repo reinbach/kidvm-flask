@@ -143,7 +143,7 @@ class Allowance(wtf.Form):
 class Transaction(wtf.Form):
     kid_id = wtf.SelectField(u'Kid', coerce=int)
     transaction_date = wtf.DateField(u'Date', format="%m/%d/%Y")
-    amount = DecimalField(u'Amount', [wtf.validators.NumberRange(min=0.0)])
+    amount = DecimalField(u'Amount', [wtf.validators.NumberRange()])
     withdrawal = wtf.BooleanField(u'Withdrawal')
     category = wtf.TextField(u'Category', [wtf.validators.Length(min=3, max=150)])
     description = wtf.TextAreaField(u'Description')
