@@ -10,7 +10,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for trx in context.kid.transactions %}
+        {% for trx in context.kid.transactions.order_by('transaction_date DESC') %}
             <tr>
                 <td>{{ loop.index0 + 1 }}</td>
                 <td>
