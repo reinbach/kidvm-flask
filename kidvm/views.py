@@ -8,9 +8,40 @@ def _render(template, context):
     return render_template(template, context=context)
 
 #---------------------------------------------------------------------------
+@app.errorhandler(404)
+def page_not_found(e):
+    return _render('404.html', dict()), 404
+
+#---------------------------------------------------------------------------
+@app.errorhandler(403)
+def page_not_found(e):
+    return _render('403.html', dict()), 403
+
+#---------------------------------------------------------------------------
+@app.errorhandler(410)
+def page_not_found(e):
+    return _render('410.html', dict()), 410
+
+#---------------------------------------------------------------------------
+@app.errorhandler(500)
+def page_not_found(e):
+    if not app.debug:
+        import logging
+        #from logging.handlers import SMTPHandler
+        #mail_handler = SMTPHandler(
+        #    mailhost=('127.0.0.1', 25),
+        #    fromaddr='server-error@{0}'.format(app.config['SITE_DOMAIN']),
+        #    toaddr=app.config['ADMINS'],
+        #    subject='{0} Failed'.format(app.config['SITE_NAME']),
+        #)
+        #mail_handler.setLevel(logging.ERROR)
+        app.logger.addHandler(mail_handler)
+    return _render('500.html', dict()), 500
+
+#---------------------------------------------------------------------------
 @app.route('/', methods=['GET'])
 def index():
-    return _render("index.html", dict())
+    return _rende("index.html", dict())
 
 #---------------------------------------------------------------------------
 @app.route('/about', methods=['GET'])
