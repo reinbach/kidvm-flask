@@ -448,9 +448,8 @@ def reset_password(email):
     If so, generate a unique key based on the last login and password for the user
     Send a link with this unique key in it to the user
     """
-    try:
-        user = AuthUser.query.filter_by(email=email).first()
-    except:
+    user = AuthUser.query.filter_by(email=email).first()
+    if user is None:
         return False
     # Generate email with unique link
     msg = Message(
@@ -475,7 +474,7 @@ def get_user_from_uid(uid):
     """
     id, tmp = uid.split('-')
     user = AuthUser.query.filter_by(id=id).first()
-    if user and user.uid == uid:
+    if user and user.get_uid() == uid:
         return True
     return False
 

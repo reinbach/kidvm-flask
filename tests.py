@@ -44,7 +44,7 @@ class KidvmTestCase(unittest.TestCase):
     #---------------------------------------------------------------------------
     def test_home_page(self):
         rv = self.app.get('/')
-        assert "Allowances made Simple" in rv.data
+        assert "Allowances Simplified" in rv.data
 
     #---------------------------------------------------------------------------
     def test_register_success(self):
@@ -71,11 +71,10 @@ class KidvmTestCase(unittest.TestCase):
 
     #---------------------------------------------------------------------------
     def test_login_success(self):
-        with models.mail.record_messages() as outbox:
-            self.register('test+valid@ironlabs.com', 'password')
-            self.logout()
-            rv = self.login('test+valid@ironlabs.com', 'password')
-            assert 'You have been logged in' in rv.data
+        self.register('test+valid@ironlabs.com', 'password')
+        self.logout()
+        rv = self.login('test+valid@ironlabs.com', 'password')
+        assert 'You have been logged in' in rv.data
 
     #---------------------------------------------------------------------------
     def test_login_last_login_set(self):
@@ -129,7 +128,7 @@ class KidvmTestCase(unittest.TestCase):
         user = models.AuthUser.query.filter_by(email='test+valid@ironlabs.com').first()
         assert user is not None
         rv = self.app.get(
-            '/reset/password/?uid=%s-%s' % (user.id, user.get_uid()),
+            '/reset/password/%s-%s' % (user.id, user.get_uid()),
             follow_redirects=True
         )
         assert "Reset Password" in rv.data
@@ -139,9 +138,9 @@ class KidvmTestCase(unittest.TestCase):
         name = 'Tooth Fairy'
         account_id = 1
         category1 = models.Category(account_id, name)
-        category1.save()
+        category1 = category1.save()
         category2 = models.Category(account_id, name)
-        category2.save()
+        category2 = category2.save()
         assert category1.id == category2.id
 
         
