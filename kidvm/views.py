@@ -41,7 +41,7 @@ def page_not_found(e):
 #---------------------------------------------------------------------------
 @app.route('/', methods=['GET'])
 def index():
-    return _rende("index.html", dict())
+    return _render("index.html", dict())
 
 #---------------------------------------------------------------------------
 @app.route('/about', methods=['GET'])
