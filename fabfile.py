@@ -15,7 +15,7 @@ def install():
         run("virtualenv --distribute --no-site-packages -p python2 {app_dir}".format(app_dir=env.app_dir))
         with cd(env.app_dir):
             # clone repo
-            run("hg clone {repo} master".format(repo=env.repo))
+            run("git clone {repo} master".format(repo=env.repo))
             with cd("master"):
                 run("source {app_dir}/bin/activate && pip install -r requirements.txt".format(app_dir=env.app_dir))
                 # setup config file
@@ -29,10 +29,7 @@ def install():
                     uwsgi_conf_dir=env.uwsgi_conf_dir,
                     app=env.app
                 ))
-                with cd("{app}".format(app=env.app)):
-                    with cd("settings"):
-                        run("rm -f currentenv.py")
-                        run("ln -s prod.py currentenv.py")
+                run("cp config_default.py config.py")
         run("systemctl reload uwsgi")
         run("systemctl reload nginx")
 
@@ -41,7 +38,7 @@ def update():
     with settings(user="root"):
         with cd("{app_dir}/master".format(app_dir=env.app_dir)):
             with settings(warn_only=True):
-                run("hg pull && hg update")
+                run("git pull")
             run("source {app_dir}/bin/activate && pip install -r requirements.txt".format(app_dir=env.app_dir))
             run("cp {app_dir}/master/nginx.conf {nginx_conf_dir}{app}.conf".format(
                 app_dir=env.app_dir,
