@@ -38,6 +38,6 @@ if not app.debug:
     ))
     app.logger.addHandler(mail_handler)
     app.logger.addHandler(file_handler)
-    
+
 
 import kidvm.views

@@ -4,7 +4,6 @@ from kidvm import app, models
 
 manager = Manager(app)
 
-#---------------------------------------------------------------------------
 @manager.command
 def allowances():
     """Add due allowances"""
