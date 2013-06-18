@@ -2,12 +2,14 @@ from __future__ import with_statement
 from fabric.api import *
 
 env.app = 'kidvm'
-env.hosts = ['web2']
+env.hosts = ['web1']
 env.sites_dir = '/opt/sites/'
 env.app_dir = env.sites_dir + env.app
 env.repo = "https://github.com/reinbach/kidvm-flask.git"
 env.nginx_conf_dir = "/opt/nginx/conf/sites/"
 env.uwsgi_conf_dir = "/etc/uwsgi/apps/"
+env.user = 'root'
+env.key_filename = '/home/greg/.ssh/id_digitalocean'
 
 def install():
     """Installs app on server"""
