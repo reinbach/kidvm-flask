@@ -7,7 +7,6 @@ from kidvm import models, app
 mail = Mail(app)
 
 
-#===============================================================================
 class SignIn(wtf.Form):
     email = EmailField(
         'Email Address',
@@ -16,12 +15,10 @@ class SignIn(wtf.Form):
     )
     password = wtf.PasswordField('Password', [wtf.validators.Required()])
 
-    #---------------------------------------------------------------------------
     def login(self):
         return models.login(self.email.data, self.password.data)
 
-    
-#===============================================================================
+
 class Register(wtf.Form):
     email = EmailField(
         'Email Address',
@@ -34,12 +31,10 @@ class Register(wtf.Form):
     ])
     confirm = wtf.PasswordField('Confirm Password')
 
-    #---------------------------------------------------------------------------
     def register(self):
         return models.create_user(self.email.data, self.password.data)
 
-        
-#===============================================================================
+
 class ForgotPassword(wtf.Form):
     email = EmailField(
         'Email Address',
@@ -47,12 +42,10 @@ class ForgotPassword(wtf.Form):
         widget=EmailInput()
     )
 
-    #---------------------------------------------------------------------------
     def reset_password(self):
         return models.reset_password(self.email.data)
 
-    
-#===============================================================================
+
 class ResetPassword(wtf.Form):
     password = wtf.PasswordField('Password', [
         wtf.validators.Required(),
@@ -61,7 +54,6 @@ class ResetPassword(wtf.Form):
     confirm = wtf.PasswordField('Confirm Password')
 
 
-#===============================================================================
 class Contact(wtf.Form):
     subject = wtf.TextField('Subject', [wtf.validators.Length(min=3, max=100)])
     from_email = EmailField(
@@ -72,18 +64,16 @@ class Contact(wtf.Form):
     )
     message = wtf.TextAreaField('Message', [wtf.validators.Length(min=10)])
 
-    #---------------------------------------------------------------------------
     def send(self):
         msg = Message(
             self.subject.data,
             recipients=[app.config['DEFAULT_MAIL_SENDER']],
-            sender=self.from_email.data
+            sender=self.from_email.data if self.from_email.data else app.config['DEFAULT_MAIL_SENDER']
         )
         msg.body = "%s" % self.message.data
         mail.send(msg)
 
 
-#===============================================================================
 class Kid(wtf.Form):
     name = wtf.TextField('Name', [wtf.validators.Length(min=3, max=100)])
     opening_balance = DecimalField(
@@ -92,7 +82,6 @@ class Kid(wtf.Form):
     )
     opening_balance_date = wtf.DateField('Starting Date', format="%m/%d/%Y")
 
-    #---------------------------------------------------------------------------
     def save(self, user, kid_id=None):
         kid = models.Kid(
             self.name.data,
@@ -104,7 +93,6 @@ class Kid(wtf.Form):
         return kid.save(user)
 
 
-#===============================================================================
 class Allowance(wtf.Form):
     kid_id = wtf.SelectField(u'Kid', coerce=int)
     period_day = wtf.SelectField(
@@ -117,16 +105,13 @@ class Allowance(wtf.Form):
     )
     amount = DecimalField('Amount', [wtf.validators.NumberRange(min=0.0)])
 
-    #---------------------------------------------------------------------------
     def validate_period_day(form, field):
         if not (0 < int(field.data) < 32):
-            raise ValidationError("Day needs to be between 1 and 31.")
+            raise wtf.ValidationError("Day needs to be between 1 and 31.")
 
-    #---------------------------------------------------------------------------
     def set_kid_choices(self, user):
         self.kid_id.choices = models.get_kids(user)
-        
-    #---------------------------------------------------------------------------
+
     def save(self, user, allowance_id=None):
         allowance = models.Allowance(
             self.kid_id.data,
@@ -139,7 +124,6 @@ class Allowance(wtf.Form):
         return allowance.save(user)
 
 
-#===============================================================================
 class Transaction(wtf.Form):
     kid_id = wtf.SelectField(u'Kid', coerce=int)
     transaction_date = wtf.DateField(u'Date', format="%m/%d/%Y")
@@ -148,15 +132,12 @@ class Transaction(wtf.Form):
     category = wtf.TextField(u'Category', [wtf.validators.Length(min=3, max=150)])
     description = wtf.TextAreaField(u'Description')
 
-    #---------------------------------------------------------------------------
     def __init__(self, *args, **kwargs):
         super(Transaction, self).__init__(*args, **kwargs)
-        
-    #---------------------------------------------------------------------------
+
     def set_kid_choices(self, user):
         self.kid_id.choices = models.get_kids(user)
 
-    #---------------------------------------------------------------------------
     def save(self, user, transaction_id=None):
         transaction = models.Transaction(
             self.kid_id.data,
@@ -168,4 +149,3 @@ class Transaction(wtf.Form):
         if transaction_id:
             transaction.id = transaction_id
         return transaction.save(user.account)
-
